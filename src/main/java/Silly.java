@@ -79,9 +79,7 @@ public class Silly implements Comparable<Silly>{
      *       strings (e.g. this.name = [first string] + [second string]).
      *       Make sure you document this method!
      */
-
-
-
+    public Silly(String chicken, String cow) {this.name = chicken + cow; }
 
 
     public static void main(String[] args) {
@@ -116,7 +114,7 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
@@ -134,18 +132,19 @@ public class Silly implements Comparable<Silly>{
     @Override
     public String toString(){
         // TODO (Task 3): Implement the body of this method!
+        return this.name;
     }
 
-    /**
-     * 4. We can also override the equals() method, which is the equivalent of
-     *    Python's __eq__; however, unlike Python, this is called when we use
-     *    .equals() rather than == (which checks for ID equality in Java).
-     *
-     *    (Relevant reading: 2.4. Equality)
-     *
-     * @param o   the object to compare to
-     * @return    whether o is a Silly object with the same name as this.
-     */
+        /**
+         * 4. We can also override the equals() method, which is the equivalent of
+         *    Python's __eq__; however, unlike Python, this is called when we use
+         *    .equals() rather than == (which checks for ID equality in Java).
+         *
+         *    (Relevant reading: 2.4. Equality)
+         *
+         * @param o   the object to compare to
+         * @return    whether o is a Silly object with the same name as this.
+         */
     @Override
     public boolean equals(Object o) {
         /**
@@ -153,14 +152,15 @@ public class Silly implements Comparable<Silly>{
          *                We've started it by checking the type of o for you.
          *                You just need to return true if the names are equal.
          */
-        if (!(o instanceof Silly)){
+        if (!(o instanceof Silly)) {
             return false;
         }
 
         Silly other = (Silly) o; // To access .name of o, we need to cast it.
-
+        return this.toString().equals(other.toString());
         // Hint: to compare strings, we need to use .equals()
         //       e.g. s1.equals(s2)
+
     }
 
     /**
@@ -194,6 +194,15 @@ public class Silly implements Comparable<Silly>{
          *                You can get the length of a string by using the
          *                .length() method.
          */
+        if (this.name.equals(other.name)){
+            return 0;
+        }
+        else if (this.name.length() > other.name.length()) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 
     /*
